@@ -1,2 +1,4 @@
 ---
 # defaults file for freeradius
+
+freeradius_template: radiusd.conf.j2

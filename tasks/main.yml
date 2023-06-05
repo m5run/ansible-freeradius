@@ -19,7 +19,7 @@
 - name: Create radiusd configuration file
   become: yes
   template:
-    src: radiusd.conf.j2
+    src: '{{ freeradius_template }}'
     dest: /etc/freeradius/radiusd.conf
     owner: root
     group: freerad
