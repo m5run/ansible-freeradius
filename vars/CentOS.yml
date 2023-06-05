@@ -1,2 +1,6 @@
 ---
 # vars file for freeradius (CentOS specific)
+freeradius_packages:
+  - freeradius
+  - freeradius-utils
+freeradius_service_name: freeradius
