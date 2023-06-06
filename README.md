@@ -3,7 +3,6 @@
 freeradius
 ==========
 
-[![Build Status](https://travis-ci.org/kbrebanov/ansible-freeradius.svg?branch=master)](https://travis-ci.org/kbrebanov/ansible-freeradius)
 
 Installs FreeRADIUS
 
@@ -15,7 +14,7 @@ This role requires Ansible 1.9 or higher.
 Role Variables
 --------------
 
-None
+freeradius_template: radiusd.conf.j2
 
 Dependencies
 ------------
@@ -29,7 +28,7 @@ Install FreeRADIUS
 ```yaml
 - hosts: all
   roles:
-    - kbrebanov.freeradius
+    - m5run.freeradius
 ```
 
 License
