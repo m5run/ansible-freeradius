@@ -4,3 +4,4 @@
 freeradius_packages:
   - freeradius
 freeradius_service_name: freeradius
+freeradius_confdir: /etc/freeradius

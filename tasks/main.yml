@@ -20,7 +20,7 @@
   become: yes
   template:
     src: '{{ freeradius_template }}'
-    dest: /etc/freeradius/radiusd.conf
+    dest: '{{ freeradius_confdir }}/radiusd.conf'
     owner: root
     group: freerad
     mode: 0640
