@@ -22,7 +22,7 @@
     src: '{{ freeradius_template }}'
     dest: '{{ freeradius_confdir }}/radiusd.conf'
     owner: root
-    group: freerad
+    group: '{{ freeradius_group }}'
     mode: 0640
   notify:
     - reload freeradius
