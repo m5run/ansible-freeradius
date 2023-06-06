@@ -3,6 +3,6 @@
 freeradius_packages:
   - freeradius
   - freeradius-utils
-freeradius_service_name: freeradius
+freeradius_service_name: radiusd
 freeradius_confdir: /etc/raddb
 freeradius_group: radiusd
