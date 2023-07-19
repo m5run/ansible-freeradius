@@ -2,6 +2,7 @@
 # vars file for freeradius (CentOS specific)
 freeradius_packages:
   - freeradius
+  - freeradius-postgresql
   - freeradius-utils
 freeradius_service_name: radiusd
 freeradius_confdir: /etc/raddb

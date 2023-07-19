@@ -16,8 +16,20 @@
   tags:
     - freeradius
 
+- name: Enable sites and modules
+  become: true
+  file:
+    src: "{{ freeradius_confdir }}/{{ item.type }}-available/{{ item.name }}"
+    dest: "{{ freeradius_confdir }}/{{ item.type }}-enabled/{{ item.name }}"
+    state: link
+  loop: "{{ freeradius_sites }}"
+  notify:
+    - reload freeradius
+  tags: 
+    - freeradius
+
 - name: Create radiusd configuration file
-  become: yes
+  become: true
   template:
     src: '{{ freeradius_template }}'
     dest: '{{ freeradius_confdir }}/radiusd.conf'
@@ -29,11 +41,50 @@
   tags:
     - freeradius
 
+- name: Create mod-sql configuration files
+  become: true
+  template:
+    src: '{{ freeradius_modsql_template }}'
+    dest: '{{ freeradius_confdir }}/mods-enabled/sql{{ index }}.conf'
+    owner: root
+    group: '{{ freeradius_group }}'
+    mode: 0640
+  vars:
+    freeradius_db_host: "{{ item }}"
+  loop: freeradius_db_hosts
+  loop_control:
+    index_var: index
+  notify:
+    - reload freeradius
+  tags:
+    - freeradius
+
+- name: Activate sql module
+  become: true
+  replace:
+    path: '{{ freeradius_confdir }}/sites-available/{{ item }}'
+    regexp: '(\s+)-sql'
+    replace: '\1sql'
+  loop: 
+    - default
+    - inner-tunnel
+  tags:
+    freeradius
+  notify: 
+    - reload freeradius
+
+- name: "Run freeradius bootstrap"
+  become: true
+  command:  "{{ freeradius_confdir }}/certs/bootstrap"
+  creates: "{{ freeradius_confdir }}/certs/ca.key"
+  tags:
+    - freeradius
+    
 - name: Ensure FreeRADIUS service is started and enabled on boot
-  become: yes
+  become: true
   service:
     name: "{{ freeradius_service_name }}"
     state: started
-    enabled: yes
+    enabled: true
   tags:
     - freeradius
