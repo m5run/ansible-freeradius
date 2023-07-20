@@ -60,19 +60,19 @@ sysconfdir = /etc
 localstatedir = /var
 sbindir = ${exec_prefix}/sbin
 logdir = /var/log/freeradius
-raddbdir = /etc/freeradius
+raddbdir ={{ freeradius_confdir }}
 radacctdir = ${logdir}/radacct
 
 #
 #  name of the running server.  See also the "-n" command-line option.
-name = freeradius
+name = {{ freeradius_service_name }}
 
 #  Location of config and logfiles.
 confdir = ${raddbdir}
 run_dir = ${localstatedir}/run/${name}
 
 # Should likely be ${localstatedir}/lib/radiusd
-db_dir = ${raddbdir}
+db_dir = ${localstatedir}/lib/radiusd
 
 #
 # libdir: Where to find the rlm_* modules.
@@ -106,7 +106,7 @@ db_dir = ${raddbdir}
 #	make
 #	make install
 #
-libdir = /usr/lib/freeradius
+libdir = /usr/lib64/freeradius
 
 #  pidfile: Where to place the PID of the RADIUS server.
 #
@@ -167,8 +167,8 @@ pidfile = ${run_dir}/${name}.pid
 #  It will join all groups where "user" is a member.  This can allow
 #  for some finer-grained access controls.
 #
-user = freerad
-group = freerad
+user = {{ freeradius_group }}
+group = {{ freeradius_group }}
 
 #  max_request_time: The maximum time (in seconds) to handle a request.
 #
@@ -224,7 +224,7 @@ cleanup_delay = 5
 #
 #  Useful range of values: 256 to infinity
 #
-max_requests = 1024
+max_requests = 16384
 
 #  listen: Make the server listen on a particular IP address, and send
 #  replies out from that address. This directive is most useful for
@@ -690,7 +690,7 @@ modules {
 	#  referenced in a processing section, such as authorize,
 	#  authenticate, accounting, pre/post-proxy, etc.
 	#
-	$INCLUDE ${confdir}/modules/
+	#$INCLUDE ${confdir}/mods-enabled/
 
 	#  Extensible Authentication Protocol
 	#
@@ -704,6 +704,7 @@ modules {
 	#
 #	$INCLUDE sql.conf
 
+	$INCLUDE ${confidir}/mods-enabled/
 	#
 	#  This module is an SQL enabled version of the counter module.
 	#
