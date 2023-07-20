@@ -51,7 +51,7 @@
     mode: 0640
   vars:
     freeradius_db_host: "{{ item }}"
-  loop: freeradius_db_hosts
+  loop: "{{ freeradius_db_hosts }}"
   loop_control:
     index_var: index
   notify:
