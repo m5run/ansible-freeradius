@@ -10,5 +10,6 @@ freeradius_sqL_mod: postgresql
 freeradius_db_user: freeradius
 freeradius_db_password: asdf
 freeradius_db_name: radius
+freeradius_db_port: 5432
 freeradius_db_hosts:
   - localhost
