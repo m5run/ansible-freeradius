@@ -6,7 +6,6 @@ freeradius_modsql_template: mod-sql.j2
 freeradius_sites:
   - { type: 'sites', name: 'default' }
   - { type: 'sites', name: 'inner-tunnel' }
-  - { type: 'sites', name: 'sql'}
 freeradius_sqL_mod: postgresql
 freeradius_db_user: freeradius
 freeradius_db_password: asdf
