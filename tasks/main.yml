@@ -76,7 +76,8 @@
 - name: "Run freeradius bootstrap"
   become: true
   command:  "{{ freeradius_confdir }}/certs/bootstrap"
-  creates: "{{ freeradius_confdir }}/certs/ca.key"
+  args:
+    creates: "{{ freeradius_confdir }}/certs/ca.key"
   tags:
     - freeradius
     
