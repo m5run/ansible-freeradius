@@ -69,7 +69,10 @@ name = {{ freeradius_service_name }}
 
 #  Location of config and logfiles.
 confdir = ${raddbdir}
+modconfdir = ${confdir}/mods-config
 run_dir = ${localstatedir}/run/${name}
+certdir = ${confdir}/certs
+cadir   = ${confdir}/certs
 
 # Should likely be ${localstatedir}/lib/radiusd
 db_dir = ${localstatedir}/lib/radiusd
@@ -167,8 +170,7 @@ pidfile = ${run_dir}/${name}.pid
 #  It will join all groups where "user" is a member.  This can allow
 #  for some finer-grained access controls.
 #
-user = {{ freeradius_group }}
-group = {{ freeradius_group }}
+# group = {{ freeradius_group }}
 
 #  max_request_time: The maximum time (in seconds) to handle a request.
 #
@@ -342,12 +344,6 @@ listen {
 #
 hostname_lookups = no
 
-#  Core dumps are a bad thing.  This should only be set to 'yes'
-#  if you're debugging a problem with the server.
-#
-#  allowed values: {no, yes}
-#
-allow_core_dumps = no
 
 #  Regular expressions
 #
@@ -704,7 +700,7 @@ modules {
 	#
 #	$INCLUDE sql.conf
 
-	$INCLUDE ${confidir}/mods-enabled/
+	$INCLUDE ${confdir}/mods-enabled/
 	#
 	#  This module is an SQL enabled version of the counter module.
 	#
@@ -795,7 +791,9 @@ instantiate {
 #	to multiple times.
 #
 ######################################################################
-$INCLUDE policy.conf
+policy {
+	$INCLUDE policy.d/
+}
 
 ######################################################################
 #

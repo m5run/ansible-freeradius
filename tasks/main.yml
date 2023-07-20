@@ -45,7 +45,7 @@
   become: true
   template:
     src: '{{ freeradius_modsql_template }}'
-    dest: '{{ freeradius_confdir }}/mods-enabled/sql{{ index }}.conf'
+    dest: '{{ freeradius_confdir }}/mods-enabled/sql{{ index }}'
     owner: root
     group: '{{ freeradius_group }}'
     mode: 0640
