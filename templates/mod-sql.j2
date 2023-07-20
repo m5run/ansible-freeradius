@@ -115,8 +115,8 @@ sql {{ freeradius_db_host.name }} {
 	
 	# Postgreql doesn't take tls{} options in its module config like mysql does - if you want to
 	# use SSL connections then use this form of connection info parameter
-	radius_db = "host={{ freeradius_db_host.address }} port={{ freeradius_db_port }} dbname={{ freeradius_db_name }} user={{ freeradius_db_user }} password={{ freeradius_db_password }} sslmode=require " # sslcert=/home/tjd/.cockroach-certs/client.localhost.crt sslkey=/home/tjd/.cockroach-certs/client.localhost.key sslrootcert=/home/tjd/.cockroach-certs/ca.crt" 
-
+	radius_db = "host={{ freeradius_db_host.address }} port={{ freeradius_db_port }} dbname={{ freeradius_db_name }} user={{ freeradius_db_user }} password={{ freeradius_db_password }} sslmode=require " 
+	
 	# If you want both stop and start records logged to the
 	# same SQL table, leave this as is.  If you want them in
 	# different tables, put the start table in acct_table1
