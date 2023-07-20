@@ -12,4 +12,4 @@ freeradius_db_password: asdf
 freeradius_db_name: radius
 freeradius_db_port: 5432
 freeradius_db_hosts:
-  - localhost
+  - { name: 'localhost', address: 'localhost' }

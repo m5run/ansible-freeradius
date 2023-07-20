@@ -693,7 +693,7 @@ modules {
 	#  For all EAP related authentications.
 	#  Now in another file, because it is very large.
 	#
-	$INCLUDE eap.conf
+	#$INCLUDE eap.conf
 
 	#  Include another file that has the SQL-related configuration.
 	#  This is another file only because it tends to be big.
@@ -779,7 +779,7 @@ instantiate {
 	#}
 	redundant-load-balance sql {
 		{% for db in freeradius_db_hosts %}
-		{{ db }}
+		{{ db.name }}
 		{% endfor %}
 	}
 }
