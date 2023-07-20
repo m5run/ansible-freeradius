@@ -781,9 +781,9 @@ instantiate {
 	#	sql2
 	#}
 	redundant-load-balance sql {
-		crdb1
-		crdb2
-		crdb3
+		{% for db in freeradius_db_hosts %}
+		{{ db }}
+		{% endfor %}
 	}
 }
 
