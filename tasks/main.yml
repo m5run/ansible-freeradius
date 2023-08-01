@@ -32,8 +32,7 @@
   become: true
   copy:
     src: "{{ freeradius_default_file }}"
-    dest: "{{ freeradius_confdir }}sites-enabled/default"
-    state: present
+    dest: "{{ freeradius_confdir }}/sites-enabled/default"
     mode: 0640
     owner: root
     group: '{{ freeradius_group }}'
