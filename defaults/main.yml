@@ -3,8 +3,8 @@
 
 freeradius_template: radiusd.conf.j2
 freeradius_modsql_template: mod-sql.j2
+freeradius_sqlippool_template: sqlippool.j2
 freeradius_sites:
-  - { type: 'sites', name: 'default' }
   - { type: 'sites', name: 'inner-tunnel' }
 freeradius_sql_mod: postgresql
 freeradius_db_user: freeradius
@@ -13,3 +13,4 @@ freeradius_db_name: radius
 freeradius_db_port: 5432
 freeradius_db_hosts:
   - { name: 'localhost', address: 'localhost' }
+

@@ -28,6 +28,20 @@
   tags: 
     - freeradius
 
+- name: Add default site configuration
+  become: true
+  copy:
+    src: "{{ freeradius_default_file }}"
+    path: "{{ freeradius_confdir }}sites-enabled/default"
+    state: present
+    mode: 0640
+    owner: root
+    group: '{{ freeradius_group }}'
+  notify:
+    - reload freeradius
+  tags:
+    - freeradius
+
 - name: Create radiusd configuration file
   become: true
   template:
@@ -72,6 +86,19 @@
     freeradius
   notify: 
     - reload freeradius
+
+- name: Create sqlippool configuration file
+  become: true
+  template:
+    src: '{{ freeradius_sqlippool_template }}'
+    dest: '{{ freeradius_confdir }}/mods-enabled/sqlippool'
+    owner: root
+    group: '{{ freeradius_group }}'
+    mode: 0640
+  notify:
+    - reload freeradius
+  tags:
+    - freeradius
 
 - name: "Run freeradius bootstrap"
   become: true

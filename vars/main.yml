@@ -1,2 +1,4 @@
 ---
 # vars file for freeradius
+
+freeradius_default_file: "default"
