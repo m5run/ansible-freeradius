@@ -86,14 +86,19 @@
   notify: 
     - reload freeradius
 
-- name: Create sqlippool configuration file
+- name: Create sqlippool configuration files
   become: true
   template:
     src: '{{ freeradius_sqlippool_template }}'
-    dest: '{{ freeradius_confdir }}/mods-enabled/sqlippool'
+    dest: '{{ freeradius_confdir }}/mods-enabled/ippool-{{ item.name }}'
     owner: root
     group: '{{ freeradius_group }}'
     mode: 0640
+  vars:
+    freeradius_db_host: "{{ item }}"
+  loop: "{{ freeradius_db_hosts }}"
+  loop_control:
+    index_var: index
   notify:
     - reload freeradius
   tags:

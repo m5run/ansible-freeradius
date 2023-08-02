@@ -6,12 +6,12 @@
 #
 #  $Id: ef874cab500640e1462c5855c78ec63d5cbbc2ff $
 
-sqlippool {
+sqlippool ippool-{{ freeradius_db_host.name }} {
 	# SQL instance to use (from mods-available/sql)
 	#
 	#  If you have multiple sql instances, such as "sql sql1 {...}",
 	#  use the *instance* name here: sql1.
-	sql_module_instance = "sql"
+	sql_module_instance = "{{ freeradius_db_host.name }}"
 
 	#  This is duplicative of info available in the SQL module, but
 	#  we have to list it here as we do not yet support nested

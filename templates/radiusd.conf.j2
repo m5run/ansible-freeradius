@@ -685,6 +685,11 @@ instantiate {
 		{{ db.name }}
 		{% endfor %}
 	}
+	redundant-load-balance sqlippool {
+		{% for db in freeradius_db_hosts %}
+		ippool-{{ db.name }}
+		{% endfor %}
+	}
 }
 
 ######################################################################
