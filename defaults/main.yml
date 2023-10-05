@@ -2,6 +2,8 @@
 # defaults file for freeradius
 
 freeradius_template: radiusd.conf.j2
+freeradius_clients_template: clients.conf.j2
+freeradius_users_template: users.j2
 freeradius_modsql_template: mod-sql.j2
 freeradius_sqlippool_template: sqlippool.j2
 freeradius_sites:
@@ -13,4 +15,6 @@ freeradius_db_name: radius
 freeradius_db_port: 5432
 freeradius_db_hosts:
   - { name: 'localhost', address: 'localhost' }
+freeradius_clients:
+  - { name: localhost, ipaddr: 127.0.0.1, secret: testing123 }
 

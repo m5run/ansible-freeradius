@@ -86,6 +86,33 @@
   notify: 
     - reload freeradius
 
+- name: Create clients
+  become: true
+  template:
+    src: '{{ freeradius_clients_template }}'
+    dest: '{{ freeradius_confdir }}/clients.conf'
+    owner: root
+    group: '{{ freeradius_group }}'
+    mode: 0640
+  notify:
+    - reload freeradius
+  tags:
+    - freeradius
+
+- name: Create users
+  become: true
+  template:
+    src: '{{ freeradius_users_template }}'
+    dest: '{{ freeradius_confdir }}/users'
+    owner: root
+    group: '{{ freeradius_group }}'
+    mode: 0640
+  notify:
+    - reload freeradius
+  tags:
+    - freeradius
+
+
 - name: Create sqlippool configuration files
   become: true
   template:
