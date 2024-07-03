@@ -681,10 +681,15 @@ instantiate {
 	#	sql1
 	#	sql2
 	#}
-	redundant-load-balance sql {
-		{% for db in freeradius_db_hosts %}
+	redundant-load-balance sqlrw {
+		{% for db in freeradius_db_hosts %}{% if db.write %}
 		{{ db.name }}
-		{% endfor %}
+		{% endif %}{% endfor %}
+	}
+	redundant-load-balance sql {
+		{% for db in freeradius_db_hosts %}{% if db.query %}
+		{{ db.name }}
+		{% endif %}{% endfor %}
 	}
 	redundant-load-balance sqlippool {
 		{% for db in freeradius_db_hosts %}

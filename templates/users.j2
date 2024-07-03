@@ -1,11 +1,7 @@
 
 
-DEFAULT NAS-Port-Id =~ "^1/1/.*", Auth-Type := Reject
-        Alc-Subsc-ID-Str     = "%{User-Name}",
-	Alc-Subsc-Prof-Str   = "Home-Subs-Subscriber-Profile",
+DEFAULT NAS-Identifier = "NETELASTIC", Auth-Type := Reject
 	Fall-Through = Yes
 
-DEFAULT NAS-Port-Id =~ "^1/1/2:(\d+\.\d+)", User-Profile := "dual-ip_Profile", Auth-Type := Accept
-	Fall-Through = Yes
 
 
