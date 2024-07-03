@@ -1,4 +1,4 @@
-
+# {{ ansible_managed }}
 
 sql {{ freeradius_db_host.name }} {
 	dialect = "{{ freeradius_sql_mod | default('sqlite') }}"
