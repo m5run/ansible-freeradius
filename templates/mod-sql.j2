@@ -31,7 +31,7 @@ sql {{ freeradius_db_host.name }} {
 		send_application_name = yes
 	}
 	
-	radius_db = "host={{ freeradius_db_host.address }} port={{ freeradius_db_port }} dbname={{ freeradius_db_name }} user={{ freeradius_db_user }} password={{ freeradius_db_password }} sslmode=require " 
+	radius_db = "host={{ freeradius_db_host.address }} port={{ freeradius_db_port }} dbname={{ freeradius_db_name }} user={{ freeradius_db_user }} password={{ freeradius_db_password }} sslmode={{ freeradius_db_sslmode }}" 
 	
 	acct_table1 = "radacct"
 	acct_table2 = "radacct"
