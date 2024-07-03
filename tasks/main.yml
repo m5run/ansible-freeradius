@@ -6,12 +6,12 @@
   tags:
     - freeradius
 
-- include: CentOS.yml
+- include_tasks: CentOS.yml
   when: ansible_distribution == "CentOS"
   tags:
     - freeradius
 
-- include: Ubuntu.yml
+- include_tasks: Ubuntu.yml
   when: ansible_distribution == "Ubuntu"
   tags:
     - freeradius
