@@ -18,5 +18,9 @@ freeradius_db_hosts:
   - { name: 'localhost', address: 'localhost', query: true, write: true }
 freeradius_clients:
   - { name: localhost, ipaddr: 127.0.0.1, secret: testing123 }
-
+freeradius_users:
+  - name: DEFAULT
+    requirements: 'NAS-Identifier = "NETELASTIC", Auth-Type := Reject'
+    responses:
+      - Fall-Through = Yes
 

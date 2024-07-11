@@ -1,7 +1,9 @@
 # {{ ansible_managed }}
+{% for user in freeradius_users %}
 
-DEFAULT NAS-Identifier = "NETELASTIC", Auth-Type := Reject
-	Fall-Through = Yes
-
-
+{{ user.name }} {{ user.requirements }}
+{% for response in user.responses %}
+	{{ response }}
+{% endfor %}
+{% endfor %}
 
