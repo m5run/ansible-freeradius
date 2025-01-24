@@ -1,6 +1,7 @@
 ---
 
 - name: Install freeradius_exporter
+  become: yes
   copy: 
     src: freeradius_exporter
     dest: /usr/local/bin/freeradius_exporter
@@ -11,6 +12,7 @@
     - restart exporter
 
 - name: Install systemd unit file
+  become: yes
   copy: 
     src: freeradius_exporter.service
     dest: /etc/systemd/system
@@ -21,6 +23,7 @@
     - restart exporter
 
 - name: Start exporter
+  become: yes
   service:
     name: freeradius_exporter
     enabled: true
