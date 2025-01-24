@@ -160,3 +160,7 @@
     enabled: true
   tags:
     - freeradius
+
+- include_tasks: exporter.yml
+  tags:
+    - exporter
