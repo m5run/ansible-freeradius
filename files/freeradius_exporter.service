@@ -1,0 +1,30 @@
+#
+# Ansible managed
+#
+
+[Unit]
+Description=freeradius metrics exporter
+After=network-online.target
+
+[Service]
+Type=simple
+User=radiusd
+Group=radiusd
+EnvironmentFile=-/etc/sysconfig/freeradius_exporter
+ExecStart=/usr/local/bin/freeradius_exporter 
+
+SyslogIdentifier=freeradius_exporter
+Restart=always
+RestartSec=1
+StartLimitInterval=0
+
+ProtectHome=yes
+NoNewPrivileges=yes
+
+ProtectSystem=strict
+ProtectControlGroups=true
+ProtectKernelModules=true
+ProtectKernelTunables=yes
+
+[Install]
+WantedBy=multi-user.target

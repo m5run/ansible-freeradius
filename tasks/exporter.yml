@@ -1,0 +1,27 @@
+---
+
+- name: Install freeradius_exporter
+  copy: 
+    src: freeradius_exporter
+    dest: /usr/local/bin/freeradius_exporter
+    owner: radiusd
+    group: "{{ freeradius_group }}"
+    mode: 0755
+  notify:
+    - restart exporter
+
+- name: Install systemd unit file
+  copy: 
+    src: freeradius_exporter.service
+    dest: /etc/systemd/system
+    owner: root
+    group: root
+    mode: 0666
+  notify:
+    - restart exporter
+
+- name: Start exporter
+  service:
+    name: freeradius_exporter
+    enabled: true
+    state: started

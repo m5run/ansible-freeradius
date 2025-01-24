@@ -16,3 +16,9 @@
     state: reloaded
   tags:
     - freeradius
+
+- name: restart exporter
+  become: yes
+  service:
+    name: "freeradius_exporter"
+    state: restarted
