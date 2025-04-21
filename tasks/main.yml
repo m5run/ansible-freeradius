@@ -102,7 +102,7 @@
     group: '{{ freeradius_group }}'
     mode: 0640
   vars:
-    freeradius_ldap_host: "{{ item }}"
+    ldap_host: "{{ item }}"
   loop: "{{ freeradius_ldap_hosts }}"
   loop_control:
     index_var: index
