@@ -73,6 +73,21 @@
   tags:
     - freeradius
 
+- name: Remove old sql module files
+  become: true
+  file: 
+    path: '{{ freeradius_confdir }}/mods-enabled/sql-{{ item.name }}'
+    state: absent
+  loop: "{{ freeradius_db_hosts }}"
+  loop_control:
+    index_var: index
+  when:
+    freeradius_db_hosts is defined and freeradius_db_hosts | length > 0
+  notify:
+    - reload freeradius
+  tags:
+    - freeradius
+
 - name: Create mod-sql configuration files
   become: true
   template:

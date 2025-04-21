@@ -4,19 +4,7 @@
 #  Lightweight Directory Access Protocol (LDAP)
 #
 ldap {{ ldap_host.name }} {
-	#  Note that this needs to match the name(s) in the LDAP server
-	#  certificate, if you're using ldaps.  See OpenLDAP documentation
-	#  for the behavioral semantics of specifying more than one host.
-	#
-	#  Depending on the libldap in use, server may be an LDAP URI.
-	#  In the case of OpenLDAP this allows additional the following
-	#  additional schemes:
-	#  - ldaps:// (LDAP over SSL)
-	#  - ldapi:// (LDAP over Unix socket)
-	#  - ldapc:// (Connectionless LDAP)
 	server = '{{ ldap_host.address }}'
-#	server = 'ldap.rrdns.example.org'
-#	server = 'ldap.rrdns.example.org'
 
 	#  Port to connect on, defaults to 389, will be ignored for LDAP URIs.
 	port = {{ freeradius_ldap_host.port | default(389) }}
@@ -290,7 +278,7 @@ ldap {{ ldap_host.name }} {
 		#  Note that this configuration references the "user_dn"
 		#  configuration defined above.
 		#
-#		membership_filter = "(|(member=%{control:${..user_dn}})(memberUid=%{%{Stripped-User-Name}:-%{User-Name}}))"
+#		{% raw %}membership_filter = "(|(member=%{control:${..user_dn}})(memberUid=%{%{Stripped-User-Name}:-%{User-Name}}))"{% endraw %}
 
 		#  The attribute, in user objects, which contain the names
 		#  or DNs of groups a user is a member of.
@@ -441,7 +429,7 @@ ldap {{ ldap_host.name }} {
 	#  attribute, all instances of the attribute will be removed and
 	#  replaced with a single attribute.
 	accounting {
-		reference = "%{tolower:type.%{Acct-Status-Type}}"
+		{% raw %}reference = "%{tolower:type.%{Acct-Status-Type}}"{% endraw %}
 
 		type {
 			start {
