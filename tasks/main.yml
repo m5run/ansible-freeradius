@@ -96,6 +96,8 @@
   loop: 
     - default
     - inner-tunnel
+  when:
+    freeradius_db_hosts is defined and freeradius_db_hosts | length > 0
   tags:
     freeradius
   notify: 
