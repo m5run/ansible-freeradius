@@ -683,6 +683,7 @@ instantiate {
 	#	sql1
 	#	sql2
 	#}
+        {% if freeradius_db_hosts is defined and freeradius_db_hosts|length > 0 %}
 	redundant-load-balance sqlrw {
 		{% for db in freeradius_db_hosts %}{% if db.write %}
 		{{ db.name }}
@@ -698,6 +699,7 @@ instantiate {
 		ippool-{{ db.name }}
 		{% endfor %}
 	}
+        {% endif %}
 }
 
 ######################################################################
