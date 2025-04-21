@@ -91,6 +91,24 @@
   tags:
     - freeradius
 
+- name: Create mod-ldap configuration files
+  become: true
+  template:
+    src: '{{ freeradius_modldap_template }}'
+    dest: '{{ freeradius_confdir }}/mods-enabled/{{ item.name }}'
+    owner: root
+    group: '{{ freeradius_group }}'
+    mode: 0640
+  vars:
+    freeradius_ldap_host: "{{ item }}"
+  loop: "{{ freeradius_ldap_hosts }}"
+  loop_control:
+    index_var: index
+  notify:
+    - reload freeradius
+  tags:
+    - freeradius
+
 - name: Activate sql module
   become: true
   replace:

@@ -6,6 +6,7 @@ freeradius_template: radiusd.conf.j2
 freeradius_clients_template: clients.conf.j2
 freeradius_users_template: users.j2
 freeradius_modsql_template: mod-sql.j2
+freeradius_modldap_template: mod-ldap.j2
 freeradius_sqlippool_template: sqlippool.j2
 freeradius_sites:
   - { type: 'sites', name: 'inner-tunnel' }
