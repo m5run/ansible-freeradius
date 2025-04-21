@@ -6,6 +6,10 @@
   tags:
     - freeradius
 
+- name: Set freeradius_packages
+  set_fact:
+    freeradius_packages: "{{ freeradius_packages | default(_freeradius_packages) }}"
+
 - include_tasks: CentOS.yml
   when: ansible_distribution == "CentOS"
   tags:
@@ -98,6 +102,22 @@
     - inner-tunnel
   when:
     freeradius_db_hosts is defined and freeradius_db_hosts | length > 0
+  tags:
+    freeradius
+  notify: 
+    - reload freeradius
+
+- name: Activate ldap module
+  become: true
+  replace:
+    path: '{{ freeradius_confdir }}/sites-available/{{ item }}'
+    regexp: '(\s+)-ldap'
+    replace: '\1ldap'
+  loop: 
+    - default
+    - inner-tunnel
+  when:
+    freeradius_ldap_hosts is defined and freeradius_ldap_hosts | length > 0
   tags:
     freeradius
   notify: 

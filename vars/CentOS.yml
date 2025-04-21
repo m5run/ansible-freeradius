@@ -1,6 +1,6 @@
 ---
 # vars file for freeradius (CentOS specific)
-freeradius_packages:
+_freeradius_packages:
   - freeradius
   - freeradius-postgresql
   - freeradius-utils

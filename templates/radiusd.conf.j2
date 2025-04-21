@@ -700,6 +700,13 @@ instantiate {
 		{% endfor %}
 	}
         {% endif %}
+	{% if freeradius_ldap_hosts is defined and freeradius_ldap_hosts|length > 0 %}
+	redundant-load-balance ldap {
+		{% for host in freeradius_ldap_hosts %}
+		{{ host.name }}
+		{% endfor %}
+	}
+	{% endif %}
 }
 
 ######################################################################
