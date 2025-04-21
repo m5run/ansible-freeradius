@@ -1,6 +1,7 @@
 ---
 # defaults file for freeradius
 
+freeradius_default_file: "default"
 freeradius_template: radiusd.conf.j2
 freeradius_clients_template: clients.conf.j2
 freeradius_users_template: users.j2
