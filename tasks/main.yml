@@ -49,6 +49,8 @@
     mode: 0640
     owner: root
     group: '{{ freeradius_group }}'
+  when:
+    freeradius_db_hosts is defined and freeradius_db_hosts | length > 0
   notify:
     - reload freeradius
   tags:
