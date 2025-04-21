@@ -77,7 +77,7 @@
   become: true
   template:
     src: '{{ freeradius_modsql_template }}'
-    dest: '{{ freeradius_confdir }}/mods-enabled/{{ item.name }}'
+    dest: '{{ freeradius_confdir }}/mods-enabled/sql-{{ item.name }}'
     owner: root
     group: '{{ freeradius_group }}'
     mode: 0640
@@ -86,6 +86,8 @@
   loop: "{{ freeradius_db_hosts }}"
   loop_control:
     index_var: index
+  when:
+    freeradius_db_hosts is defined and freeradius_db_hosts | length > 0
   notify:
     - reload freeradius
   tags:
@@ -95,7 +97,7 @@
   become: true
   template:
     src: '{{ freeradius_modldap_template }}'
-    dest: '{{ freeradius_confdir }}/mods-enabled/{{ item.name }}'
+    dest: '{{ freeradius_confdir }}/mods-enabled/ldap-{{ item.name }}'
     owner: root
     group: '{{ freeradius_group }}'
     mode: 0640
@@ -104,6 +106,8 @@
   loop: "{{ freeradius_ldap_hosts }}"
   loop_control:
     index_var: index
+  when:
+      freeradius_ldap_hosts is defined and freeradius_ldap_hosts | length > 0
   notify:
     - reload freeradius
   tags:
